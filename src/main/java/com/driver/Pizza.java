@@ -5,32 +5,36 @@ public class Pizza {
     private int price;
     private Boolean isVeg;
     private String bill;
-int extraCheese=80;
-   int extraToppingsVeg= 70;
-    int extraToppingsnonVeg = 120;
-    int away=20;
-    int basePrice=0;
-
+    private int totalPrice;
+   private boolean takeAway;
+   private boolean addCheese;
+   private boolean addToppings;
+   private boolean isGenerated;
     public Pizza(Boolean isVeg){
 
         this.isVeg = isVeg;
         // your code goes here
-        if(isVeg){basePrice=300;}
-        else{basePrice=400;}
-        price+=basePrice;
+        if(isVeg){price=300;}
+        else{price=400;}
+
+        totalPrice=price;
+        addCheese=false;
+        addToppings=false;
+        takeAway=false;
+        isGenerated=false;
+        bill="";
+
     }
-    boolean takeAway=false;
-    boolean addCheese=false;
-    boolean addToppings=false;
+
     public int getPrice(){
-       return this.price;
+       return this.totalPrice;
     }
 
     public void addExtraCheese(){
         // your code goes here
         if(!addCheese)
         {
-            this.price+=80;
+            totalPrice+=80;
             addCheese=true;
         }
     }
@@ -38,11 +42,11 @@ int extraCheese=80;
     public void addExtraToppings(){
         // your code goes here
         if(!addToppings && isVeg){
-            this.price+=70;
+            totalPrice+=70;
             addToppings=true;
         }else if (!addToppings && !isVeg)
         {
-            this.price+=120;
+            totalPrice+=120;
             addToppings=true;
         }
     }
@@ -50,31 +54,30 @@ int extraCheese=80;
     public void addTakeaway(){
         // your code goes here
         if(!takeAway){
-            this.price+=20;
+            totalPrice+=20;
             takeAway=true;
         }
     }
-boolean isGenerated=false;
 
     public String getBill(){
         // your code goes here
         if(!isGenerated){
-            this.bill= "Base Price Of The Pizza: "+ basePrice+"\n";
+            bill+= "Base Price Of The Pizza: "+ price+"\n";
             if(addCheese){
-                bill+="Extra Cheese Added: "+extraCheese+"\n";
+                bill+="Extra Cheese Added: "+80+"\n";
             }
             if(addToppings){
                 if(isVeg){
-                    bill+="Extra Toppings Added: "+extraToppingsVeg+"\n";
+                    bill+="Extra Toppings Added: "+70+"\n";
                 }
                 else{
-                    bill+="Extra Toppings Added: " +extraToppingsnonVeg+"\n";
+                    bill+="Extra Toppings Added: " +120+"\n";
                 }
             }
             if(takeAway){
-                bill+="Paperbag Added: "+away+"\n";
+                bill+="Paperbag Added: "+20+"\n";
             }
-            bill += "Total Price: " + this.price;
+            bill += "Total Price: " + totalPrice + "\n";
             isGenerated=true;
         }
 
